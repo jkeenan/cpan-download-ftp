@@ -181,21 +181,60 @@ sub new {
 
 =item * Purpose
 
-Identify all versions of a given CPAN distribution available for download.
+Identify all versions of given CPAN distributions available for download.
 
 =item * Arguments
 
+=over 4
+
+=item 1 Single distribution
+
     $distribution = 'List-Compare';
-    @all_releases = $self->ls($distribution);
+    $all_releases_ref = $self->ls($distribution);
 
 String holding name of a single CPAN distribution.
 
+or:
+
+=item 2 Multiple distributions
+
+    $distributions = [ 'List-Compare', 'Data-Presenter' ];
+    $all_releases_ref  = $self->ls($distributions);
+
+Reference to an array holding a list of CPAN distributions.
+
+=back
+
 =item * Return Value
 
+=over 4
+
+=item 1 Single distribution
+
+Reference to an array holding a list of strings like:
 List of strings like:
 
-    "List-Compare-0.45.tar.gz",
-    "List-Compare-0.53.tar.gz",
+    [
+        "List-Compare-0.45.tar.gz",
+        "List-Compare-0.53.tar.gz",
+    ]
+
+=item 2 Multiple distributions
+
+Reference to a hash keyed on distribution name with corresponding value being
+reference to an array hholding a list of releases available for download.
+
+    {
+        'List-Compare'          => [
+            "List-Compare-0.45.tar.gz",
+            "List-Compare-0.53.tar.gz",
+        ],
+        'Data-Presenter'        => [
+            "Data-Presenter-1.03.tar.gz",
+        ],
+    }
+
+=back
 
 =back
 
@@ -203,15 +242,33 @@ List of strings like:
 
 sub ls {
     my ($self, $dist) = @_;
-    my $top_dist_dir = (split /-/, $dist)[0];
-    croak "Could not identify top-level in $dist" unless defined $top_dist_dir;
+    unless (ref($dist) eq 'ARRAY') {
+        my $these_releases_aref = $self->_single_ls($dist);
+        $self->{all_releases} = $these_releases_aref;
+        return $these_releases_aref;
+    }
+    else {  # array ref
+        my $these_releases_href;
+        for my $d (@{$dist}) {
+            #my $these_releases_aref = $self->_single_ls($d);
+            #$these_releases_href->{$d} = $these_releases_aref;
+            $these_releases_href->{$d} = $self->_single_ls($d);
+        }
+        $self->{all_releases} = $these_releases_href;
+        return $these_releases_href;
+    }
+}
+
+sub _single_ls {
+    my ($self, $d) = @_;
+    my $top_dist_dir = (split /-/, $d)[0];
+    croak "Could not identify top-level in $d" unless defined $top_dist_dir;
     my $search_dir = File::Spec->catdir($self->{dir}, $top_dist_dir);
     $self->{ftp}->cwd($search_dir)
         or croak "Cannot change to working directory $search_dir", $self->{ftp}->message;
-    my @all_releases = grep { /^$dist.*\.gz$/ } $self->{ftp}->ls()
+    my @these_releases = grep { /^$d.*\.gz$/ } $self->{ftp}->ls()
         or croak "Unable to perform FTP 'ls' call to host: $!";
-    $self->{all_releases} = \@all_releases;
-    return @all_releases;
+    return \@these_releases;
 }
 
 1;
