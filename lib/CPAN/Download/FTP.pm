@@ -1,4 +1,4 @@
-package Perl::Download::FTP;
+package CPAN::Download::FTP;
 use strict;
 use warnings;
 use 5.10.1;
@@ -7,17 +7,17 @@ use Net::FTP;
 use File::Copy;
 use Cwd;
 use File::Spec;
-our $VERSION = '0.03';
+our $VERSION = '0.01';
 
 =head1 NAME
 
-Perl::Download::FTP - Identify Perl releases and download the most recent via FTP
+CPAN::Download::FTP - Identify CPAN distribution releases and download the most recent via FTP
 
 =head1 SYNOPSIS
 
-    use Perl::Download::FTP;
+    use CPAN::Download::FTP;
 
-    $self = Perl::Download::FTP->new( {
+    $self = CPAN::Download::FTP->new( {
         host        => 'ftp.cpan.org',
         dir         => '/pub/CPAN/src/5.0',
         verbose     => 1,
@@ -78,19 +78,19 @@ connection by using CPAN library Test::RequiresInternet.
 
 =item * Purpose
 
-Perl::Download::FTP constructor.
+CPAN::Download::FTP constructor.
 
 =item * Arguments
 
-    $self = Perl::Download::FTP->new();
+    $self = CPAN::Download::FTP->new();
 
-    $self = Perl::Download::FTP->new( {
+    $self = CPAN::Download::FTP->new( {
         host        => 'ftp.cpan.org',
         dir         => '/pub/CPAN/src/5.0',
         verbose     => 1,
     } );
 
-    $self = Perl::Download::FTP->new( {
+    $self = CPAN::Download::FTP->new( {
         host        => 'ftp.cpan.org',
         dir         => '/pub/CPAN/src/5.0',
         Timeout     => 5,
@@ -106,7 +106,7 @@ descriptive output; by default, this is off.
 
 =item * Return Value
 
-Perl::Download::FTP object.
+CPAN::Download::FTP object.
 
 =item * Comment
 
@@ -654,13 +654,8 @@ sub get_specific_release {
 
 =head1 BUGS AND SUPPORT
 
-Please report any bugs by mail to C<bug-Perl-Download-FTP@rt.cpan.org>
+Please report any bugs by mail to C<bug-CPAN-Download-FTP@rt.cpan.org>
 or through the web interface at L<http://rt.cpan.org>.
-
-=head1 ACKNOWLEDGEMENTS
-
-Thanks for feedback from Chad Granum, Kent Fredric and David Golden
-in the perl.cpan.workers newsgroup.
 
 =head1 AUTHOR
 
@@ -677,7 +672,7 @@ it and/or modify it under the same terms as Perl itself.
 The full text of the license can be found in the
 LICENSE file included with this module.
 
-Copyright James E Keenan 2017.  All rights reserved.
+Copyright James E Keenan 2018.  All rights reserved.
 
 =head1 SEE ALSO
 
