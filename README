@@ -1,15 +1,15 @@
-README for Perl extension Perl-Download-FTP
+README for Perl extension CPAN-Download-FTP
 
-Perl::Download::FTP - Identify Perl releases and download the most recent via FTP
+CPAN::Download::FTP - Identify CPAN distribution releases and download the most recent via FTP
 
-This document refers to version 0.03 of Perl-Download-FTP.
-This version was released December 04 2017.
+This document refers to version 0.01 of CPAN-Download-FTP.
+This version was released January 14 2018.
 
 SYNOPSIS
 
-    use Perl::Download::FTP;
+    use CPAN::Download::FTP;
 
-    $self = Perl::Download::FTP->new( {
+    $self = CPAN::Download::FTP->new( {
         host        => 'ftp.cpan.org',
         dir         => '/pub/CPAN/src/5.0',
         verbose     => 1,
@@ -41,9 +41,9 @@ INSTALLATION
 To install this module on your system, place the tarball archive file in a
 temporary directory and call the following:
 
-    gunzip Perl-Download-FTP-0.03.tar.gz
-    tar xf Perl-Download-FTP-0.03.tar
-    cd Perl-Download-FTP-0.03
+    gunzip CPAN-Download-FTP-0.01.tar.gz
+    tar xf CPAN-Download-FTP-0.01.tar
+    cd CPAN-Download-FTP-0.01
     perl Makefile.PL
     make
     make test

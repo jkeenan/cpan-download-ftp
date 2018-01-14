@@ -1,2 +1,2 @@
-# perl-download-ftp
-Identify Perl releases and download the most recent
+# cpan-download-ftp
+Identify CPAN distribution releases and download the most recent via FTP

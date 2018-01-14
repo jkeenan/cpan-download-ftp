@@ -4,10 +4,10 @@ require 5.008;
 my $mm_ver = ExtUtils::MakeMaker->VERSION;
 
 WriteMakefile(
-    NAME         => 'Perl::Download::FTP',
-    VERSION_FROM => 'lib/Perl/Download/FTP.pm', # finds \$VERSION
+    NAME         => 'CPAN::Download::FTP',
+    VERSION_FROM => 'lib/CPAN/Download/FTP.pm', # finds \$VERSION
     AUTHOR       => 'James E Keenan (jkeenan@cpan.org)',
-    ABSTRACT     => 'Identify Perl releases and download the most recent via FTP',
+    ABSTRACT     => 'Identify CPAN distribution releases and download the most recent via FTP',
     MIN_PERL_VERSION => '5.10.1',
     PREREQ_PM    => {
                      'Net::FTP'     => 0,
@@ -28,14 +28,14 @@ WriteMakefile(
         'meta-spec' => { version => 2 },
         dynamic_config => 1,
         resources => {
-            homepage => 'http://thenceforward.net/perl/modules/Perl-Download-FTP/',
+            homepage => 'http://thenceforward.net/perl/modules/CPAN-Download-FTP/',
             repository => {
-                url => 'https://github.com/jkeenan/perl-download-ftp.git',
-                web => 'https://github.com/jkeenan/perl-download-ftp',
+                url => 'https://github.com/jkeenan/cpan-download-ftp.git',
+                web => 'https://github.com/jkeenan/cpan-download-ftp',
                 type => 'git',
             },
             bugtracker => {
-                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Download-FTP',
+                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=CPAN-Download-FTP',
             },
         },
     })),
